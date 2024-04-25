@@ -4,4 +4,3 @@ It works like this:
  1. User enters the location
  2. Than the time in that location
  3. Bot recieves the time in user`s location using his geolocation
- 4. 
