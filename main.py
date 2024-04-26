@@ -4,7 +4,7 @@ import json
 import pytz
 import datetime
 
-bot = TeleBot('7177123889:AAFdPcixJwIfvsW_UgA1wqMf_BihvwaoOXI')
+bot = TeleBot('Your_api_key')
 global initial_message, latitude, longitude, time_zone, location_message, error_message
 timezones = {"msk": "Europe/Moscow", "pdg": "Europe/Podgorica", "chl": "Asia/Yekaterinburg"}
 cities = {"msk": "Москве", "pdg": "Подгорице", "chl": "Челябинске"}
