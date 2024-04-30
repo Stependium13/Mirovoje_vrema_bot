@@ -54,12 +54,13 @@ def callback_handler(call):
     global initial_message, time_zone
     time_zone = call.data
     try:
-        error_message = ""
+        error_message = None
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=initial_message.message_id,
                           text=f"Во сколько это будет в {cities[time_zone]}?\n(например 16:35)", reply_markup=None)
         bot.register_next_step_handler(call.message, send_time, time_zone)
     except:
         pass
+
 
 def send_time(message, time_zone):
     global latitude, longitude, keyboard, error_message
@@ -86,5 +87,9 @@ def send_time(message, time_zone):
         bot.delete_message(message.chat.id, message.message_id)
         bot.register_next_step_handler(message, send_time, time_zone)
 
+
 while True:
-    bot.infinity_polling()
+    try:
+        bot.infinity_polling()
+    except:
+        bot.infinity_polling()
