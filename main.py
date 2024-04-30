@@ -18,6 +18,7 @@ button1 = types.KeyboardButton(text="Перевести новое время", 
 keyboard.add(button)
 keyboard1.add(button1)
 
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     global initial_message, keyboard, location_message
@@ -85,4 +86,5 @@ def send_time(message, time_zone):
         bot.delete_message(message.chat.id, message.message_id)
         bot.register_next_step_handler(message, send_time, time_zone)
 
-bot.polling()
+while True:
+    bot.infinity_polling()
