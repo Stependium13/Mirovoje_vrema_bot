@@ -4,10 +4,16 @@ import json
 import pytz
 import datetime
 
-bot = TeleBot('Your_api_key')
+bot = TeleBot("API_KEY")
 global initial_message, latitude, longitude, time_zone, location_message, error_message
-timezones = {"msk": "Europe/Moscow", "pdg": "Europe/Podgorica", "chl": "Asia/Yekaterinburg"}
-cities = {"msk": "Москве", "pdg": "Подгорице", "chl": "Челябинске"}
+timezones = {"msk": "Europe/Moscow",
+             "pdg": "Europe/Podgorica",
+             "chl": "Asia/Yekaterinburg",
+             "scr": "America/Los_Angeles"}
+cities = {"msk": "Москве",
+          "pdg": "Подгорице",
+          "chl": "Челябинске",
+          "scr": "Сакраменто"}
 
 tz_api_https = "https://api.geotimezone.com/public/timezone"
 
@@ -34,11 +40,8 @@ def handle_location(message):
     longitude = message.location.longitude
     inline_keyboard = types.InlineKeyboardMarkup()
     # Add a button to the keyboard
-    inline_keyboard.add(types.InlineKeyboardButton(text="Подгорице", callback_data="pdg"))
-
-    inline_keyboard.add(types.InlineKeyboardButton(text="Москве", callback_data="msk"))
-
-    inline_keyboard.add(types.InlineKeyboardButton(text="Челябинске", callback_data="chl"))
+    for key in cities.keys():
+        inline_keyboard.add(types.InlineKeyboardButton(cities[key], callback_data=key))
     initial_message = bot.send_message(message.from_user.id, "Событие произойдёт в:",
                                        reply_markup=inline_keyboard)
     try:
